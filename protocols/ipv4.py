@@ -1,5 +1,5 @@
-from ip import ip
-from igmp import igmp
+from protocols.ip import ip
+from protocols.igmp import igmp
 
 class ipv4(ip):
 

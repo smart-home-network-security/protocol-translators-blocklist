@@ -1,4 +1,4 @@
-from Protocol import Protocol
+from protocols.Protocol import Protocol
 
 class Custom(Protocol):
 

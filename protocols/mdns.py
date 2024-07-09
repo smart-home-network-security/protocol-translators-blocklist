@@ -1,4 +1,4 @@
-from dns import dns
+from protocols.dns import dns
 
 class mdns(dns):
     
