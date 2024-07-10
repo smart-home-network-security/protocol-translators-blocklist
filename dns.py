@@ -17,7 +17,7 @@ class dns(Custom):
     @staticmethod
     def get_domain_name_rule(domain_name: str) -> dict:
         """
-        Retrieves the NFQueue rule to match a given domain name.
+        Retrieve the NFQueue rule to match a given domain name.
 
         :param domain_name: Domain name to match.
         :return: Dictionary containing the NFQueue rule to match the given domain name.

@@ -145,11 +145,10 @@ class ip(Protocol):
         domain_name_rule_suffix = "_addr}})"
         ip_addr_rule_prefix = "compare_ip((ip_addr_t) {{.version = " + str(version) + ", .value." + self.protocol_name + " = "
         ip_addr_rule_suffix = "_addr(payload)}}, ip_str_to_net(\"{}\", " + str(version) + "))"
-        cached_ip_rule_suffix = "_addr}}, interactions_data[{}].cached_ip)"
         # Template rules for a domain name
         rules_domain_name = {
-            "forward": "( " + ip_addr_rule_prefix + addr_dir + cached_ip_rule_suffix + " || " + domain_name_rule_prefix + addr_dir + domain_name_rule_suffix + " )",
-            "backward": "( " + ip_addr_rule_prefix + other_dir + cached_ip_rule_suffix + " || " + domain_name_rule_prefix + other_dir + domain_name_rule_suffix + " )"
+            "forward": "( " + domain_name_rule_prefix + addr_dir + domain_name_rule_suffix + " )",
+            "backward": "( " + domain_name_rule_prefix + other_dir + domain_name_rule_suffix + " )"
         }
         # Template rules for an IP address
         rules_address = {

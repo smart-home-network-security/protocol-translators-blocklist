@@ -1,5 +1,4 @@
 from ip import ip
-from igmp import igmp
 
 class ipv4(ip):
 
