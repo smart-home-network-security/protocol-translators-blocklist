@@ -1,4 +1,4 @@
-from ip import ip
+from .ip import ip
 
 class ipv4(ip):
 
