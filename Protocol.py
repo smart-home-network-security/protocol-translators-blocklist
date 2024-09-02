@@ -75,15 +75,6 @@ class Protocol:
         """
         Add a new nftables rule to the nftables rules accumulator.
 
-        :param field: Field to add the rule for.
-        :param template_rules: Dictionary containing the protocol-specific rules to add.
-        :param is_backward (optional): Whether the field to add is for a backward rule.
-                                       Optional, default is `False`.
-        :param func (optional): Function to apply to the field value before writing it.
-                                Optional, default is the identity function.
-        :param backward_func (optional): a to apply to the field value in the case of a backwards rule.
-                                         Will be applied after the forward function.
-                                         Optional, default is the identity function.
         Args:
             field (str): Field to add the rule for.
             rules (dict): Dictionary containing the protocol-specific rules to add.
