@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Union
 import importlib
+import pkgutil
 
 
 class Protocol:
@@ -48,8 +49,9 @@ class Protocol:
         :param protocol_data: Dictionary containing the protocol data.
         :param device: Dictionary containing the device metadata.
         """
-        module = importlib.import_module(f"profile_translator.protocols.{protocol_name}")
-        cls = getattr(module, protocol_name)
+        package = importlib.import_module(__name__).__name__.rpartition(".")[0]
+        protocol_module = importlib.import_module(f"{package}.{protocol_name}")
+        cls = getattr(protocol_module, protocol_name)
         return cls(protocol_data, device)
 
     
