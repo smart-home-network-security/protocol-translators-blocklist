@@ -49,6 +49,13 @@ class http(Custom):
         # - URI prefix: string match with the beginning of the URI
         uri = self.protocol_data.get("uri", None)
         if uri is not None:
+            # If URI contains HTTP request parameters, remove them
+            if "?" in uri:
+                uri = uri.split("?")[0]
+                uri += "*" if not uri.endswith("*") else ""
+                self.protocol_data["uri"] = uri
+            
+            # Add URI match rule
             length = len(uri) - 1 if uri.endswith("*") or uri.endswith("$") else len(uri) + 1
             rule = {"forward": f"strncmp(http_message.uri, \"{{}}\", {length}) == 0"}
             self.add_field("uri", rule, is_backward)
