@@ -23,6 +23,20 @@ class coap(Custom):
                                      Optional, default is "src".
         :return: Dictionary containing the (forward and backward) nftables and nfqueue rules for this policy.
         """
+        # Request or response
+        coap_response_rule = {}
+        if "response" in self.protocol_data and self.protocol_data["response"]:
+            if is_backward:
+                coap_response_rule = {"template": "{}coap_is_request(coap_message)", "match": ""}
+            else:
+                coap_response_rule = {"template": "{}coap_is_request(coap_message)", "match": "!"}
+        else:
+            if is_backward:
+                coap_response_rule = {"template": "{}coap_is_request(coap_message)", "match": "!"}
+            else:
+                coap_response_rule = {"template": "{}coap_is_request(coap_message)", "match": ""}
+        self.rules["nfq"].append(coap_response_rule)
+
         # Lambda functions to convert a CoAP type or method to its C representation (upper case and separated by underscores)
         func_coap_type = lambda type: f"COAP_{type.upper().replace('-', '_')}"
         func_coap_method = lambda method: f"HTTP_{method.upper().replace('-', '_')}"
