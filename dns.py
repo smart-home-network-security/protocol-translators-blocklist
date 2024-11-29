@@ -24,15 +24,12 @@ class dns(Custom):
         """
         if domain_name.startswith(dns.WILDCARD):
             suffix = domain_name[len(dns.WILDCARD):]
-            return {
-                "template": f"dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{{}}\", {len(suffix)})",
-                "match": suffix
-            }
         else:
-            return {
-                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
-                "match": domain_name
-            }
+            suffix = domain_name.split('.', 1)[1]
+        return {
+            "template": f"dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{{}}\", {len(suffix)})",
+            "match": suffix
+        }
 
 
     def parse(self, is_backward: bool = False, initiator: str = "src") -> dict:
