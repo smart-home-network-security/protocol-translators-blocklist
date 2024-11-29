@@ -166,7 +166,7 @@ class ip(Protocol):
             for v in value:
                 is_ip = self.is_ip(v)
                 template_rules = rules_address if is_ip else rules_domain_name
-                func = self.explicit_address if is_ip else lambda x: x
+                func = self.explicit_address if is_ip else lambda n: n.split('.', 1)[1]
                 match.append(func(v))
                 if not is_backward:
                     template.append(template_rules["forward"])
@@ -177,7 +177,7 @@ class ip(Protocol):
             # Value is a single element
             is_ip = self.is_ip(value)
             template_rules = rules_address if is_ip else rules_domain_name
-            func = self.explicit_address if is_ip else lambda x: x
+            func = self.explicit_address if is_ip else lambda n: n.split('.', 1)[1]
             if not is_backward:
                 rules = {"template": template_rules["forward"], "match": func(value)}
             elif is_backward and "backward" in template_rules:
