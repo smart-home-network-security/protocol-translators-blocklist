@@ -65,7 +65,8 @@ class Custom(Protocol):
                 rules = Custom.build_nfq_list_match(value, template_rules, is_backward, func, backward_func)
             else:
                 # Value is a single element
-                value = Protocol.convert_value(value)
+                if type(value) != float:
+                    value = Protocol.convert_value(value)
                 if not is_backward:
                     rules = {"template": template_rules["forward"], "match": func(value)}
                 elif is_backward and "backward" in template_rules:
