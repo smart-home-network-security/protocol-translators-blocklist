@@ -1,5 +1,7 @@
 # IDE files
 .vscode/
 
-# Python caches
+# Python stuff
+.venv
 __pycache__
+.pytest_cache
