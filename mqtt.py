@@ -1,4 +1,4 @@
-from Custom import Custom
+from .Custom import Custom
 
 class mqtt(Custom):
 

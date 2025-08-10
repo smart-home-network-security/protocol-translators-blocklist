@@ -2,6 +2,7 @@ from typing import Union
 import ipaddress
 from .Protocol import Protocol
 from .igmp import igmp
+from .icmpv6 import icmpv6
 
 class ip(Protocol):
 
@@ -33,6 +34,7 @@ class ip(Protocol):
             "gateway":       "fddd:ed18:f05b::1",
             "gateway-local": "fe80::c256:27ff:fe73:460b",
             "phone":         "fe80::db22:fbec:a6b4:44fe",
+            **icmpv6.groups
         }
     }
 
@@ -47,7 +49,7 @@ class ip(Protocol):
         """
         if type(addr) == list:
             # List of addresses
-            return all([ip.is_ip_static(a) for a in addr])
+            return all([ip.is_ip_static(a, version) for a in addr])
         
         # Single address
         if addr == "self" or addr in ip.addrs[version]:
@@ -55,7 +57,7 @@ class ip(Protocol):
             return True
         # Address is not a well-known alias
         try:
-            ipaddress.ip_address(addr)
+            ipaddress.ip_network(addr)
             return True
         except ValueError:
             # Address is not an explicit address
