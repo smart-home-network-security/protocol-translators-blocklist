@@ -26,7 +26,7 @@ class arp(Protocol):
     ip_addrs = {
         "local": "192.168.1.0/24",
         "gateway": "192.168.1.1",
-        "phone": "192.168.1.222"
+        "phone": "192.168.1.193"
     }
 
 
